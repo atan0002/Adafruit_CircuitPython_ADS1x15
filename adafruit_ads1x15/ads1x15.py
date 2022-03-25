@@ -31,6 +31,7 @@ _ADS1X15_POINTER_CONFIG = const(0x01)
 _ADS1X15_CONFIG_OS_SINGLE = const(0x8000)
 _ADS1X15_CONFIG_MUX_OFFSET = const(12)
 _ADS1X15_CONFIG_COMP_QUE_DISABLE = const(0x0003)
+_ADS1X15_CONFIG_COMP_QUE_ENABLE = const(0x0002)
 _ADS1X15_CONFIG_GAIN = {
     2 / 3: 0x0000,
     1: 0x0200,
@@ -165,7 +166,7 @@ class ADS1x15:
         config |= _ADS1X15_CONFIG_GAIN[self.gain]
         config |= self.mode
         config |= self.rate_config[self.data_rate]
-        config |= _ADS1X15_CONFIG_COMP_QUE_DISABLE
+        config |= _ADS1X15_CONFIG_COMP_QUE_ENABLE
         self._write_register(_ADS1X15_POINTER_CONFIG, config)
 
         # Wait for conversion to complete
